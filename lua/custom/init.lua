@@ -4,8 +4,6 @@
 -- This is where your custom modules and plugins go.
 -- Please check NvChad docs if you're totally new to nvchad + dont know lua!!
 
-local hooks = require "core.hooks"
-
 local buf_augroup = function(name, event, fn)
    vim.api.nvim_exec(
       string.format(
@@ -32,36 +30,37 @@ end
 --    return current
 -- end)
 
-hooks.add("setup_mappings", function(map)
-   vim.o.history = 10000
-   vim.o.undolevels = 10000
-   vim.o.undofile = true
+local map = require("core.utils").map
 
-   local opts = { noremap = true, silent = true }
+vim.o.history = 10000
+vim.o.undolevels = 10000
+vim.o.undofile = true
 
-   map("n", "U", "<c-r>", opts)
-   map("n", "W", ":write<cr>", opts)
-   map("n", "Q", ":bd<CR>", opts)
-   map("n", "Y", "yy", opts)
-   map("n", "sv", ":<C-u>split<CR>", opts)
-   map("n", "sg", ":<C-u>vsplit<CR>", opts)
-   map("n", "gd", ":Telescope lsp_definitions<CR>", opts)
-   map("n", "<Space>", "<cmd>lua require'hop'.hint_words()<cr>", {})
-   map("n", "T", ":LspTrouble<CR>", opts)
-   map("n", "<leader>d", ":LspSym<CR>", opts)
-   map("n", "<leader>D", ":TroubleToggle document_diagnostics<CR>", opts)
-   -- map("n", "M", ":LspAct<cr>", opts)
-   map("n", "D", ":LspDiagLine<CR>", opts)
-   map("n", "<leader>y", ":Telescope neoclip<CR>", opts)
-   -- map("n", "R", "<cmd>lua require'telescope.builtin'.planets{}", opts)
-   -- map("n", "]", ":LspDiagNext<CR>", opts)
-   -- map("n", "[", ":LspDiagPrev<CR>", opts)
-   -- map("n", "]", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
-   -- map("n", "[", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
-   map("n", "<Leader>T", "<cmd>lua require'telescope.builtin'.grep_string{}<cr>", opts)
-   map("n", "<Leader>R", "<cmd>lua require'telescope.builtin'.resume{}<cr>", opts)
+local opts = { noremap = true, silent = true }
 
-   vim.cmd [[
+map("n", "U", "<c-r>", opts)
+map("n", "W", ":write<cr>", opts)
+map("n", "Q", ":bd<CR>", opts)
+map("n", "Y", "yy", opts)
+map("n", "sv", ":<C-u>split<CR>", opts)
+map("n", "sg", ":<C-u>vsplit<CR>", opts)
+map("n", "gd", ":Telescope lsp_definitions<CR>", opts)
+map("n", "<Space>", "<cmd>lua require'hop'.hint_words()<cr>", {})
+map("n", "T", ":LspTrouble<CR>", opts)
+map("n", "<leader>d", ":LspSym<CR>", opts)
+map("n", "<leader>D", ":TroubleToggle document_diagnostics<CR>", opts)
+-- map("n", "M", ":LspAct<cr>", opts)
+map("n", "D", ":LspDiagLine<CR>", opts)
+map("n", "<leader>y", ":Telescope neoclip<CR>", opts)
+-- map("n", "R", "<cmd>lua require'telescope.builtin'.planets{}", opts)
+-- map("n", "]", ":LspDiagNext<CR>", opts)
+-- map("n", "[", ":LspDiagPrev<CR>", opts)
+-- map("n", "]", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", opts)
+-- map("n", "[", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", opts)
+map("n", "<Leader>T", "<cmd>lua require'telescope.builtin'.grep_string{}<cr>", opts)
+map("n", "<Leader>R", "<cmd>lua require'telescope.builtin'.resume{}<cr>", opts)
+
+vim.cmd [[
     set cmdheight=2
     set shortmess=AsIF
 
@@ -108,7 +107,6 @@ hooks.add("setup_mappings", function(map)
         echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
     endfunc
 ]]
-end)
 
 -- NOTE : opt is a variable  there (most likely a table if you want multiple options),
 -- you can remove it if you dont have any custom options
@@ -120,7 +118,9 @@ end)
 
 local jsfiles = { "javascript", "typescript", "javascriptreact", "typescriptreact", "graphql" }
 
-hooks.add("install_plugins", function(use)
+local customPlugins = require "core.customPlugins"
+
+customPlugins.add(function(use)
    use {
       "jose-elias-alvarez/nvim-lsp-ts-utils",
    }
