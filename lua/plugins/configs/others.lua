@@ -9,6 +9,7 @@ M.autopairs = function()
    if present1 and present2 then
       autopairs.setup {
          disable_filetype = { "TelescopePrompt", "guihua", "guihua_rust", "clap_input" },
+         fast_wrap = {},
       }
 
       if vim.o.ft == "clap_input" and vim.o.ft == "guihua" and vim.o.ft == "guihua_rust" then
