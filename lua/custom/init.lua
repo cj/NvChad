@@ -330,9 +330,15 @@ customPlugins.add(function(use)
                -- { key = "<Space>la", mode = "n", func = "require('navigator.codelens').run_action()" },
             },
             lsp_installer = true,
+            lsp_signature_help = true,
+            -- signature_help_cfg = {
+            --    debug = false, -- virtual hint enable
+            --    bind = true,
+            -- },
             lsp = {
+               disable_lsp = { "jsonls" },
                diagnostic_virtual_text = false,
-               -- format_on_save = false,
+               format_on_save = false,
                code_lens = true,
                -- display_diagnostic_qf = true,
                code_action = {

@@ -30,9 +30,9 @@ local sources = {
       filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
    },
 
-   b.diagnostics.eslint_d.with {
-      filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
-   },
+   -- b.diagnostics.eslint_d.with {
+   --    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
+   -- },
 
    -- Lua
    b.formatting.stylua,
@@ -52,7 +52,9 @@ M.setup = function()
 
       -- format on save
       on_attach = function(client, bufnr)
+         -- require("navigator.lspclient.attach").on_attach(client, bufnr)
          client.resolved_capabilities.document_formatting = true
+         -- buf_augroup("LspFormatOnSave", "BufWritePre", "lua vim.lsp.buf.formatting_sync(nil, 5000)")
       end,
    }
 end
