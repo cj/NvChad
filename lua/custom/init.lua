@@ -285,6 +285,7 @@ customPlugins.add(function(use)
    use {
       "ray-x/navigator.lua",
       requires = { "cj/guihua.lua", run = "cd lua/fzy && make" },
+      -- commit = "5b2e003258bc73ecaf3192090419ac8e95d60680",
       config = function()
          require("navigator").setup {
             -- keymaps = {{key = "gK", func = "declaration()"}},
