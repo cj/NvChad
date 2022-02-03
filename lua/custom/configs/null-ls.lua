@@ -26,9 +26,9 @@ local sources = {
       filetypes = { "html", "json", "yaml", "markdown", "lua", "graphql" },
    },
 
-   b.formatting.eslint_d.with {
-      filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
-   },
+   -- b.formatting.eslint_d.with {
+   --    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },
+   -- },
 
    -- b.diagnostics.eslint_d.with {
    --    filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue" },

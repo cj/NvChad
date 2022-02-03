@@ -301,8 +301,8 @@ customPlugins.add(function(use)
                { key = "<c-]>", func = "require('navigator.definition').definition()" },
                { key = "gD", func = "declaration({ border = 'rounded', max_width = 80 })" },
                { key = "gp", func = "require('navigator.definition').definition_preview()" },
-               { key = "gT", func = "require('navigator.treesitter').buf_ts()" },
-               { key = "<Leader>gT", func = "require('navigator.treesitter').bufs_ts()" },
+               { key = "gt", func = "require('navigator.treesitter').buf_ts()" },
+               { key = "<Leader>gt", func = "require('navigator.treesitter').bufs_ts()" },
                -- { key = "K", func = "hover({ popup_opts = { border = single, max_width = 80 }})" },
                { key = "K", func = "vim.lsp.buf.hover()" },
                { key = "M", mode = "n", func = "require('navigator.codeAction').code_action()" },
@@ -337,10 +337,26 @@ customPlugins.add(function(use)
             --    bind = true,
             -- },
             lsp = {
-               disable_lsp = { "jsonls" },
+               disable_lsp = {
+                  "jsonls",
+                  "angularls",
+                  "denols",
+                  "sumneko_lua",
+                  "yamlls",
+                  "bashls",
+                  "pylsp",
+                  "sqls",
+                  "jedi_language_server",
+                  "null-ls",
+               },
                diagnostic_virtual_text = false,
                format_on_save = false,
                code_lens = true,
+               tsserver = { -- gopls setting
+                  on_attach = function(client, bufnr) -- on_attach for gopls
+                     client.resolved_capabilities.document_formatting = false
+                  end,
+               },
                -- display_diagnostic_qf = true,
                code_action = {
                   enable = true,
