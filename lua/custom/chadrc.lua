@@ -25,7 +25,12 @@ M.ui = {
    italic_comments = true,
 }
 
+
+local userPlugins = require "custom.plugins"
+
 M.plugins = {
+   install = userPlugins,
+
    default_plugin_config_replace = {
       nvim_tree = "custom.configs.nvimtree",
       telescope = "custom.configs.telescope",
